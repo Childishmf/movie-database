@@ -1,0 +1,36 @@
+@use "variables" as *;
+
+body {
+    background-color: $bg-color;
+    color: $text-color;
+    font-family: $font-family;
+    display: flex;
+    justify-content: center;
+}
+
+h1 {
+    font-weight: 400;
+}
+
+p.about-content {
+    border: solid 10px $highlight-color;
+    border-radius: 10px;
+    padding: 1.5rem;
+    position: relative;
+    z-index: -2;
+    background-color: $highlight-color;
+    width: 40%;
+}
+
+.about-content:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: $bg-color;
+    z-index: -1;
+    top: 0;
+    left: 0;
+}
