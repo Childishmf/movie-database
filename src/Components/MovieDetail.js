@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import "./MovieDetail.scss";
+import "../scss/MovieDetail.scss";
 import YoutubeEmbed from "./YoutubeEmbed";
 import logo from './images/Spider-man-2.png';
+import "../scss/main.scss"
 
 
 
