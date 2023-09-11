@@ -1,16 +1,15 @@
 import React, { useState } from "react";
-import "../scss/MovieDetail.scss";
-import YoutubeEmbed from "./YoutubeEmbed";
-import logo from './images/Spider-man-2.png';
-import "../scss/main.scss"
+import YoutubeEmbed from "../components/YoutubeEmbed";
+import logo from '../images/Spider-man-2.png';
+import Nav from "../components/Nav"
 
 
 
-
-const MovieDetail = () => {
+const PageDetails = () => {
 
   return (
     <div className="movieDetail">
+      <Nav />
       <div className="MovieBio">
       <div className="MovieInfo">
         <h1>Spider-Man: Across the Spider-Verse</h1>
@@ -29,4 +28,4 @@ const MovieDetail = () => {
   );
 };
 
-export default MovieDetail;
+export default PageDetails;

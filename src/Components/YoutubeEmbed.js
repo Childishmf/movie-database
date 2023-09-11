@@ -1,5 +1,4 @@
 import React from "react";
-import "../scss/YoutubeEmbed.scss";
 import PropTypes from "prop-types";
 
 const YoutubeEmbed = ({ embedId }) => (
