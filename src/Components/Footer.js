@@ -5,8 +5,10 @@ import { Link } from 'react-router-dom';
 function Footer() {
 	return (
 		<div className='footer'>
-			<section className='footer-column'>
-				<h2>Moviemax</h2>
+			<section className='footer-left'>
+				<h1>Moviemax</h1>
+			</section>
+			<section className='footer-center'>
 				<Link to='/'>Home</Link>
 				<Link to='/about'>About</Link>
 				<Link to='/favorites'>Favorites</Link>

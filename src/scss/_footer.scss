@@ -31,3 +31,13 @@
 .footer a:hover {
   color: #007bff;
 }
+.footer-left {
+  display: flex;
+  align-items: center; /* Vertically center the "Moviemax" heading */
+}
+
+.footer-center {
+     display: flex;
+      flex-direction: column;
+  text-align: center; /* Center-align the links */
+}
