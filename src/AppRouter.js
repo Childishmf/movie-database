@@ -3,22 +3,31 @@ import PageAbout from "./pages/page-about"
 import PageHome from "./pages/page-home"
 import PageDetails from "./pages/page-details";
 import PageFavourites from "./pages/page-favourites";
+import Footer from './components/Footer'; // Adjust the import path as needed
 
 function AppRouter() {
 	return (
 		<BrowserRouter>
-			<div className="wrapper">
+			<div className='wrapper'>
 				<main>
 					<Routes>
-						<Route path="/" exact element={<PageHome />} />	
-						<Route path="/about" element={<PageAbout />} />
-						<Route path="/details" element={<PageDetails />} />
-						<Route path="/favourites" element={<PageFavourites />} />
+						<Route path='/' exact element={<PageHome />} />
+						<Route path='/about' element={<PageAbout />} />
+						<Route path='/details' element={<PageDetails />} />
+						<Route path='/favourites' element={<PageFavourites />} />
 					</Routes>
 				</main>
+				{/* Include the Footer component here */}
+				<Footer />
 			</div>
 		</BrowserRouter>
 	);
+	
+	
 }
+
+
+
+
 
 export default AppRouter;
