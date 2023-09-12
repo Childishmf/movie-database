@@ -1,8 +1,8 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import PageAbout from "./pages/page-about"
-import PageHome from "./pages/page-home"
-import PageDetails from "./pages/page-details";
-import PageFavourites from "./pages/page-favourites";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import PageAbout from './pages/page-about';
+import PageHome from './pages/page-home';
+import PageDetails from './pages/page-details';
+import PageFavourites from './pages/page-favourites';
 import Footer from './components/Footer'; // Adjust the import path as needed
 
 function AppRouter() {
@@ -22,12 +22,6 @@ function AppRouter() {
 			</div>
 		</BrowserRouter>
 	);
-	
-	
 }
-
-
-
-
 
 export default AppRouter;
