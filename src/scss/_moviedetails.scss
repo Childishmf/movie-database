@@ -1,0 +1,24 @@
+.movieDetail {
+    height: 500px;
+    background-color: #010C47;
+    color: #ffffff;
+}
+.MovieInfo{
+    // width: 50%;
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    font-family: 'Playfair', serif;
+    font-family: 'Roboto Slab', serif;
+    font-size: x-large;
+    padding: 10px;
+    margin-left: 50px;
+    width: 50%;
+}
+
+
+.MovieLogo{
+    padding: 10px;
+}
+.MovieBio{
+    display: flex;
+}
