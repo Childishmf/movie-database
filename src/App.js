@@ -1,7 +1,12 @@
 import './App.scss';
+import MovieGrid from './MovieGrid';
 
 function App() {
-	return <div className='App'></div>;
+	return (
+	<>
+	<MovieGrid/>
+	</>
+	)
 }
 
 export default App;
