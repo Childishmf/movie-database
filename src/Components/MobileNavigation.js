@@ -31,5 +31,5 @@ const MobileNavigation = () => {
 };
 export default MobileNavigation;
 
-//to break it down.. its pretty much a else if fuctionanlity with open? and open && 
+//to break it down.. its pretty much a like a else if fuctionanlity with open? and open && 
 // if open show close menu icon, if closed show hamburger icon

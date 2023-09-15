@@ -32,12 +32,15 @@ nav a:hover {
 
 
 @media (max-width: 600px){
+    nav{
+        background-color: $bg-color;
+    }
     .Navigation{
         display: none;
     }
     .MobileNavigation{
         display: flex;
-        background-color: $nav-bg-color;
+     
         align-items: center;
     }
     .Hamburger{
@@ -51,5 +54,15 @@ nav a:hover {
         right: 4%;
         cursor: pointer;
         
+    }
+    .MobileNavigation ul{
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 40px;
+        right: 0;
+        width: 100%;
+        background-color: $nav-bg-color;
+        align-items: center;
     }
 }
