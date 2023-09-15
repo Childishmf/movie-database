@@ -1,27 +1,31 @@
 @use "variables" as *;
-.nav {
+nav {
     background-color: $nav-bg-color;
     padding: 10px;
     font-family: $font-family;
 }
 
-.nav ul {
+nav ul {
     list-style-type: none;
     padding: 0;
 }
 
-.nav li {
+nav li {
     display: inline;
     margin-right: 10px;
 }
 
-.nav a {
+nav a {
     color: $nav-link-color;
     text-decoration: none;
     font-size: $font-size;
 }
 
-.nav a:hover {
+nav a:hover {
     color: $highlight-color;
     text-decoration: underline;
+}
+
+.MobileNavigation{
+    display: none;
 }
