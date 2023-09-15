@@ -37,6 +37,13 @@ nav a:hover {
     }
     .MobileNavigation{
         display: flex;
-        background-color: $highlight-color;
+        background-color: $nav-bg-color;
+        align-items: center;
     }
+    .Hamburger{
+        position: absolute;
+        right: 4%;
+        cursor: pointer;
+    }
+    
 }
