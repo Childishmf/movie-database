@@ -7,10 +7,9 @@ import '../scss/App.scss';
 const Nav = () => {
 	return (
 		<div className='{classes.NavBar}'>
-			<MobileNavigation />
 			<Navigation />
-	 </div>
- )
+		</div>
+	);
 };
 
 export default Nav;
@@ -33,3 +32,4 @@ export default Nav;
 // 		</ul>
 // 	</nav>
 // ); justins code - cam
+//<MobileNavigation /> commenting iit out for now

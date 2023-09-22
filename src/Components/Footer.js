@@ -1,12 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; 
-
+import { Link } from 'react-router-dom';
 
 function Footer() {
 	return (
 		<div className='footer'>
 			<section className='footer-left'>
-				<h1>Moviemax</h1>
+				<h1>Movie Cat</h1>
 			</section>
 			<section className='footer-center'>
 				<Link to='/'>Home</Link>

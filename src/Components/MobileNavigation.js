@@ -8,6 +8,7 @@ const MobileNavigation = () => {
     const Hamburgericon = <HiOutlineMenu className='Hamburger' size='40px' color='red' onClick={() => setOpen(!open)} />;
     const closeicon = <AiOutlineClose className='Closebtn' size='40px' color='red' onClick={() => setOpen(!open)} />;
 	return (
+		
 		<nav className='MobileNavigation'>
 			{open ? closeicon : Hamburgericon}
 			{open && (

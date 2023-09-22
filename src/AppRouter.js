@@ -4,10 +4,12 @@ import PageHome from './pages/page-home';
 import PageDetails from './pages/page-details';
 import PageFavourites from './pages/page-favourites';
 import Footer from './components/Footer'; // Adjust the import path as needed
+import Header from './components/header'; 
 
 function AppRouter() {
 	return (
 		<BrowserRouter>
+			<Header /> {/* Include the Header component */}
 			<div className='wrapper'>
 				<main>
 					<Routes>
