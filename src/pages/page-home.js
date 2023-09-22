@@ -1,9 +1,5 @@
-import Nav from "../components/Nav"
-
 function PageHome() {
-	return (
-		<Nav />
-	);
+	return <></>;
 }
 
 export default PageHome;

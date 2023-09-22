@@ -5,8 +5,8 @@ import { AiOutlineClose } from 'react-icons/ai';
 
 const MobileNavigation = () => {
     const [open, setOpen] = useState(false);
-    const Hamburgericon = <HiOutlineMenu className='Hamburger' size='40px' color='red' onClick={() => setOpen(!open)} />;
-    const closeicon = <AiOutlineClose className='Closebtn' size='40px' color='red' onClick={() => setOpen(!open)} />;
+    const Hamburgericon = <HiOutlineMenu className='Hamburger' size='40px' color='black' onClick={() => setOpen(!open)} />;
+    const closeicon = <AiOutlineClose className='Closebtn' size='40px' color='black' onClick={() => setOpen(!open)} />;
 	return (
 		
 		<nav className='MobileNavigation'>

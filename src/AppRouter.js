@@ -4,7 +4,8 @@ import PageHome from './pages/page-home';
 import PageDetails from './pages/page-details';
 import PageFavourites from './pages/page-favourites';
 import Footer from './components/Footer'; // Adjust the import path as needed
-import Header from './components/header'; 
+import Header from './components/Header';
+import useMediaQuery from './hooks/useMediaQuery';
 
 function AppRouter() {
 	return (

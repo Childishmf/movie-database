@@ -1,9 +1,5 @@
-import Nav from "../components/Nav"
-
 function PageFavourites() {
-	return (
-		<Nav />
-	);
+	return <></>;
 }
 
 export default PageFavourites;

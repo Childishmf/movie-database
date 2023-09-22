@@ -5,8 +5,7 @@ import MobileNavigation from './MobileNavigation'; // Import your MobileNavigati
 const Header = () => {
 	return (
 		<header>
-			 {/* Render your Navigation component */}
-			<MobileNavigation /> {/* Render your MobileNavigation component */}
+			<Navigation /> {/* Render your Navigation component */}
 		</header>
 	);
 };
