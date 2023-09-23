@@ -42,6 +42,17 @@ function MovieGrid() {
           />
           <h2>{movie.title}</h2>
           <p>{movie.release_date}</p>
+
+
+          {/* Youtube videos */}
+          <iframe
+            width="560"
+            height="315"
+            src={`https://www.youtube.com/embed/VIDEO_ID`}
+            title="YouTube Video Player"
+            frameborder="0"
+            allowfullscreen
+          ></iframe>
         </div>
       ))}
     </div>
