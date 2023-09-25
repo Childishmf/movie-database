@@ -23,14 +23,15 @@ function MovieGrid() {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        setMovies(data.results);
+        // Limit the movies to 12 using splice
+        setMovies(data.results.slice(0, 12));
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
     getMovies();
-  }, []); // <-- You had an extra `()` here
+  }, []);
 
   return (
     <div className="movie-grid">
@@ -43,15 +44,14 @@ function MovieGrid() {
           <h2>{movie.title}</h2>
           <p>{movie.release_date}</p>
 
-
           {/* Youtube videos */}
           <iframe
             width="560"
             height="315"
             src={`https://www.youtube.com/embed/VIDEO_ID`}
             title="YouTube Video Player"
-            frameborder="0"
-            allowfullscreen
+            frameBorder="0"
+            allowFullScreen
           ></iframe>
         </div>
       ))}
