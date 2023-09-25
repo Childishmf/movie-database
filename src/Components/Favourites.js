@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function MovieGrid() {
+function Favourites() {
   const [movies, setMovies] = useState([]);
   const navigate = useNavigate();
   const onMoreInfo = (id) => navigate('/details', {state: {movieId: id}});
@@ -56,4 +56,4 @@ function MovieGrid() {
   );
 }
 
-export default MovieGrid;
+export default Favourites;
