@@ -1,11 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { favouritesKey } from '../globals/constants';
 
 function MovieGrid() {
   const [movies, setMovies] = useState([]);
   const navigate = useNavigate();
   const onMoreInfo = (id) => navigate('/details', {state: {movieId: id}});
   // const test = (id) => console.log(id);
+
+  function addFavourites(id) {
+    let favourites = JSON.parse(localStorage.getItem(favouritesKey));
+
+    if (favourites == null) {
+      favourites = [];
+    }
+
+    favourites = [...favourites, id];
+    let favouritesAsJson = JSON.stringify(favourites);
+    localStorage.setItem(favouritesKey, favouritesAsJson);
+  }
 
   useEffect(() => {
     const options = {
@@ -49,7 +62,7 @@ function MovieGrid() {
           <p>{movie.release_date}</p>
           <button className='infoBtn' type="button" onClick={() => onMoreInfo(movie.id)}>More Info</button>
           <br />
-          <button className='favsBtn' type="button" onClick={console.log("clicked")}>Favorite</button>
+          <button className='favsBtn' type="button" onClick={() => addFavourites(movie.id)}>Favorite</button>
         </div>
       ))}
     </div>

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { favouritesKey } from '../globals/constants';
 
 function Favourites() {
   const [movies, setMovies] = useState([]);
   const navigate = useNavigate();
   const onMoreInfo = (id) => navigate('/details', {state: {movieId: id}});
-  // const test = (id) => console.log(id);
+  
+  const favouritesIds = JSON.parse(localStorage.getItem(favouritesKey));
 
   useEffect(() => {
     const options = {
@@ -27,8 +29,9 @@ function Favourites() {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        setMovies(data.results);
-        console.log(movies);
+        const allMovies = data.results;
+        const favouriteMovies = allMovies.filter(movie => favouritesIds.includes(movie.id));
+        setMovies(favouriteMovies);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
