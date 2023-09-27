@@ -4,7 +4,7 @@ import MovieGrid from "../components/MovieGrid";
 function PageHome() {
 	return (
 		<>
-		<Nav />
+		
 		<MovieGrid/>
 		</>
 	);

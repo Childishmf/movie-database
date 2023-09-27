@@ -1,0 +1,75 @@
+@use 'variables' as *;
+nav {
+	padding: 10px;
+	font-family: $font-family;
+}
+
+nav ul {
+	list-style-type: none;
+	padding: 0;
+	background-color: $nav-bg-color;
+}
+
+nav li {
+	display: inline;
+	margin-right: 10px;
+}
+
+nav a {
+	color: $nav-link-color;
+	text-decoration: none;
+	font-size: $font-size;
+}
+
+nav a:hover {
+	color: $highlight-color;
+	text-decoration: underline;
+}
+
+.MobileNavigation {
+	display: none;
+}
+
+header {
+	background-color: $nav-bg-color;
+	width: 100%;
+	height: 3rem;
+}
+
+@media (max-width: 600px) {
+	nav  {
+		background-color: $nav-bg-color;
+	}
+	// .Navigation {
+	// 	display: none;
+	// }
+	.MobileNavigation {
+		display: flex;
+
+		align-items: center;
+	}
+
+	.Hamburger {
+		position: absolute;
+		right: 4%;
+		cursor: pointer;
+		top: 1px;
+	}
+
+	.Closebtn {
+		position: absolute;
+		right: 4%;
+		cursor: pointer;
+		top: 1px;
+	}
+	.MobileNavigation ul {
+		display: flex;
+		flex-direction: column;
+		position: absolute;
+		top: 40px;
+		right: 0;
+		width: 100%;
+		background-color: $nav-bg-color;
+		align-items: center;
+	}
+}
