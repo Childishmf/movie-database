@@ -1,8 +1,19 @@
 @import './main';
 @import './moviedetails';
 @import './youtubeembed';
-
+@import './footer';
+@import './nav';
 
 a {
-    text-decoration: none;
+	text-decoration: none;
+}
+
+body {
+	margin: 0px;
+}
+#root {
+	margin: 0;
+	   
+    display: flex;
+    flex-direction: column;
 }

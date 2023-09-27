@@ -4,7 +4,7 @@ import Favourites from "../components/Favourites";
 function PageFavourites() {
 	return (
 		<>
-			<Nav />
+			
 			<Favourites />
 		</>
 	);
