@@ -3,10 +3,10 @@ nav {
 	padding: 10px;
 	font-family: $font-family;
 	display: flex;
-    flex-direction: row-reverse;
+	flex-direction: row-reverse;
 }
 
-//  
+//
 
 nav li {
 	display: inline;
@@ -35,12 +35,24 @@ header {
 }
 
 @media (max-width: 600px) {
-	nav  {
+	nav {
 		background-color: $nav-bg-color;
 	}
 	// .Navigation {
 	// 	display: none;
 	// }
+
+	nav li a {
+		border: 1px solid black;
+		padding: 0px 84px;
+		background-color: $highlight-color;
+		font-size: 1.5rem;
+	}
+
+	nav a {
+		color: $navtext-color;
+	}
+
 	.MobileNavigation {
 		display: flex;
 
@@ -67,7 +79,11 @@ header {
 		top: 40px;
 		right: 0;
 		width: 100%;
-		background-color: $nav-bg-color;
+		background-color: $navmb_bg-color;
 		align-items: center;
+	}
+
+	.MobileNavigation ul li {
+		margin-bottom: 11px; /* Adjust the value to set the desired space between items */
 	}
 }
