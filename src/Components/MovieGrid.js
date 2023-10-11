@@ -8,7 +8,17 @@ function MovieGrid() {
   const navigate = useNavigate();
   const onMoreInfo = (id) => navigate('/details', {state: {movieId: id}});
   // const test = (id) => console.log(id);
-  
+  const [selected, setSelected] = useState('popular');
+  const buttonSelect = (e) => {
+    let id = e.target.id;
+    id === 'popular' 
+    ? setSelected('popular')
+    : id === 'top-rated'
+    ? setSelected('top-rated')
+    : id === 'now-playing'
+    ? setSelected('now-playing')
+    : setSelected('upcoming')
+  }
   useEffect(() => {
     const options = {
       method: 'GET',
@@ -40,20 +50,28 @@ function MovieGrid() {
   }, []); // <-- You had an extra `()` here
 
   return (
-    <div className="movie-grid">
-      {movies.map((movie) => (
-        <div key={movie.id} className="movie-card">
-          <img
-            src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-            alt={movie.title}
-          />
-          <h2>{movie.title}</h2>
-          <p>{movie.release_date}</p>
-          <button className='infoBtn' type="button" onClick={() => onMoreInfo(movie.id)}>More Info</button>
-          <br />
-          <button className='favsBtn' type="button" onClick={() => setFavourites(movie.id)}>Favorite</button>
-        </div>
-      ))}
+    <div className="movie-wrapper">
+      <div className='radio-wrapper'>
+              <button id='popular' className={selected === "popular" ? "selected radio-btn" : "radio-btn"} onClick={buttonSelect}>Popular</button>
+              <button id='top-rated' className={selected === "top-rated" ? "selected radio-btn" : "radio-btn"} onClick={buttonSelect}>Top Rated</button>
+              <button id='now-playing' className={selected === "now-playing" ? "selected radio-btn" : "radio-btn"} onClick={buttonSelect}>Now Playing</button>
+              <button id='upcoming' className={selected === "upcoming" ? "selected radio-btn" : "radio-btn"} onClick={buttonSelect}>Upcoming</button>
+      </div>
+      <div className="movie-grid">
+        {movies.map((movie) => (
+          <div key={movie.id} className="movie-card">
+            <img
+              src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+              alt={movie.title}
+            />
+            <h2>{movie.title}</h2>
+            <p>{movie.release_date}</p>
+            <button className='infoBtn' type="button" onClick={() => onMoreInfo(movie.id)}>More Info</button>
+            <br />
+            <button className='favsBtn' type="button" onClick={() => setFavourites(movie.id)}>Favorite</button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
