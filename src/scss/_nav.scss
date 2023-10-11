@@ -44,7 +44,7 @@ header {
 
 	nav li a {
 		border: 1px solid black;
-		padding: 0px 84px;
+		padding: 4px 93px;
 		background-color: $highlight-color;
 		font-size: 1.5rem;
 	}
@@ -84,6 +84,6 @@ header {
 	}
 
 	.MobileNavigation ul li {
-		margin-bottom: 11px; /* Adjust the value to set the desired space between items */
+		margin-bottom: 19px; /* Adjust the value to set the desired space between items */
 	}
 }
