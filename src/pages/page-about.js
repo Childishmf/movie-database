@@ -6,16 +6,19 @@ function PageAbout() {
 		<div className='about'>
 			<div className='content'>
 				<h1>About Us</h1>
-				<p className='about-content'>
-					MovieMax is dedicated to bringing you information on all the newest and upcoming movies, popular feature films, and top rated
-					classics. <br></br>
-					<br></br>
-					Add movies to your Favorites collection, browse movie ratings, or discover your next must-watch through watching the newest
-					trailers!
-					<br></br>
-					<br></br>
-					Max out your enjoyment with MovieMax.
-				</p>
+				<div className='about-content'>
+					<p>
+						MovieMax is dedicated to bringing you information on all the newest and upcoming movies, popular feature films, and top rated
+						classics.
+					</p>
+					<p>
+						Add movies to your Favorites collection, browse movie ratings, or discover your next must-watch through watching the newest
+						trailers!
+					</p>
+					<p>Max out your enjoyment with MovieMax.</p>
+					<img src='../images/tmdb.svg' alt='tmdb logo'></img>
+				</div>
+
 			</div>
 		</div>
 	);
