@@ -5,11 +5,11 @@ import setFavourites from './SetFavourites';
 
 function MovieGrid() {
   const [movies, setMovies] = useState([]);
-  const [sortingOption, setSortingOption] = useState('popular'); // 'popular', 'best_rated', 'now_playing', or 'upcoming'
   const navigate = useNavigate();
   const onMoreInfo = (id) => navigate('/details', {state: {movieId: id}});
   // const test = (id) => console.log(id);
   const [selected, setSelected] = useState('popular');
+  
   const buttonSelect = (e) => {
     let id = e.target.id;
     id === 'popular' 
@@ -18,11 +18,8 @@ function MovieGrid() {
     ? setSelected('top-rated')
     : id === 'now-playing'
     ? setSelected('now-playing')
-    : setSelected('upcoming')
+    : setSelected('upcoming');
   }
-  const handleSortingChange = (event) => {
-    setSortingOption(event.target.value);
-  };
   useEffect(() => {
     const options = {
       method: 'GET',
@@ -36,34 +33,29 @@ function MovieGrid() {
       try {
         let endpoint = '';
 
-        if (sortingOption === 'popular') {
-          endpoint = 'now_playing';
-        } else if (sortingOption === 'best_rated') {
-          endpoint = 'top_rated';
-        } else if (sortingOption === 'now_playing') {
-          endpoint = 'now_playing';
-        } else if (sortingOption === 'upcoming') {
-          endpoint = 'upcoming';
-        }
-
+        selected === 'popular'
+        ? endpoint = 'popular'
+        : selected === 'top-rated'
+        ? endpoint = 'top_rated'
+        : selected === 'now-playing'
+        ? endpoint = 'now_playing'
+        : endpoint = 'upcoming';
         const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${endpoint}?language=en-US&page=1`,
-          options
-        );
-
+                `https://api.themoviedb.org/3/movie/${endpoint}?language=en-US&page=1`,
+                options
+              );
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+        throw new Error('Network response was not ok');
         }
-
         const data = await response.json();
         setMovies(data.results.slice(0, 12));
-      } catch (error) {
+      }
+      catch (error) {
         console.error('Error fetching data:', error);
       }
-    };
-
+    }
     getMovies();
-  }, [sortingOption]);
+  }, [selected]);
 
   return (
     <div className="movie-wrapper">
