@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 
 const PageDetails = () => {
   const location = useLocation();
-  let movieId = location.state.movieId;
+  let movieId = location.state ? location.state.movieId : null;
   const [movieDetail, setMovieDetail] = useState(null);
 
   function addFavourites() {
