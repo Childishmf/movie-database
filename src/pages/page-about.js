@@ -1,4 +1,5 @@
 import useMediaQuery from '../hooks/useMediaQuery';
+import tmdb from '../images/tmdb.svg';
 
 function PageAbout() {
 	const isDesktop = useMediaQuery('(min-width: 600px)');
@@ -16,7 +17,10 @@ function PageAbout() {
 						trailers!
 					</p>
 					<p>Max out your enjoyment with MovieMax.</p>
-					<img src='../images/tmdb.svg' alt='tmdb logo'></img>
+					
+					<img src={tmdb} alt='tmdb logo' width='200px'></img>
+					<p>This project is made by Cam, Mohamed, Lourane, and Justin using React JS.</p>
+					<p className='tmdb'>This product uses the TMDb API but is not endorsed or certified by TMDb.</p>
 				</div>
 
 			</div>

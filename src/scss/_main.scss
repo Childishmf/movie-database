@@ -20,7 +20,11 @@ div.about-content {
     z-index: -2;
     background-color: $highlight-color;
     width: 40%;
+    p {
+        margin-left: 10px;
+    }
 }
+
 
 .about-content:after {
     content: "";
@@ -38,4 +42,13 @@ div.about-content {
 .movie-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.tmdb {
+    margin-bottom: 80px;
+}
+
+.about-content img {
+    float: left;
+    margin: 0 15px;
 }
