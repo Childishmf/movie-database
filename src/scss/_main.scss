@@ -34,3 +34,8 @@ p.about-content {
     top: 0;
     left: 0;
 }
+
+.movie-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}

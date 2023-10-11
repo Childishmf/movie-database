@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import YoutubeEmbed from "../components/YoutubeEmbed";
 import logo from '../images/Spider-man-2.png';
-import Nav from "../components/Nav"
 import { Authorization, favouritesKey } from '../globals/constants';
 import { useLocation } from "react-router-dom";
 
@@ -54,7 +53,6 @@ const PageDetails = () => {
   
   return (
     <div className="movieDetail">
-      <Nav />
       <div className="MovieBio">
       <div className="MovieInfo">
         <h1>{movieDetail?.title}</h1>
