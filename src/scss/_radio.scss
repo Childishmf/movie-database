@@ -1,0 +1,31 @@
+@use "variables" as *;
+
+.radio-wrapper {
+    padding: 0.4rem 0.2rem;
+    background-color: $nav-link-color;
+    width: max-content;
+    display: flex;
+    border-radius: 20px;
+    margin: 5px;
+}
+
+.radio-btn {
+    border: 5px solid $bg-color;
+    color: $bg-color;
+    background-color: $nav-link-color;
+    padding: 0.5rem;
+    margin: 0 5px;
+    border-radius: 18px;
+    font-weight: bold;
+}
+
+.radio-btn:hover {
+    background-color: $bg-color;
+    color: $nav-link-color;
+}
+
+.radio-btn.selected {
+    background-color: $bg-color;
+    color: $nav-link-color;
+}
+

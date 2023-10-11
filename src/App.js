@@ -1,5 +1,5 @@
 import './App.scss';
-import MovieGrid from './MovieGrid';
+import MovieGrid from 'MovieGrid';
 
 function App() {
 	return (

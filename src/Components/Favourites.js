@@ -2,23 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { favouritesKey } from '../globals/constants';
 
-function MovieGrid() {
+function Favourites() {
   const [movies, setMovies] = useState([]);
   const navigate = useNavigate();
   const onMoreInfo = (id) => navigate('/details', {state: {movieId: id}});
-  // const test = (id) => console.log(id);
-
-  function addFavourites(id) {
-    let favourites = JSON.parse(localStorage.getItem(favouritesKey));
-
-    if (favourites == null) {
-      favourites = [];
-    }
-
-    favourites = [...favourites, id];
-    let favouritesAsJson = JSON.stringify(favourites);
-    localStorage.setItem(favouritesKey, favouritesAsJson);
-  }
+  
+  const favouritesIds = JSON.parse(localStorage.getItem(favouritesKey));
 
   useEffect(() => {
     const options = {
@@ -40,20 +29,16 @@ function MovieGrid() {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-<<<<<<< HEAD
-        // Got to 12 using splice
-        setMovies(data.results.slice(0, 12));
-=======
-        setMovies(data.results);
-        console.log(movies);
->>>>>>> 7269384a5c227d04c606edf6dc57d49d424b1e08
+        const allMovies = data.results;
+        const favouriteMovies = allMovies.filter(movie => favouritesIds.includes(movie.id));
+        setMovies(favouriteMovies);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
     getMovies();
-  }, []);
+  }, []); // <-- You had an extra `()` here
 
   return (
     <div className="movie-grid">
@@ -65,18 +50,13 @@ function MovieGrid() {
           />
           <h2>{movie.title}</h2>
           <p>{movie.release_date}</p>
-<<<<<<< HEAD
-
-=======
           <button className='infoBtn' type="button" onClick={() => onMoreInfo(movie.id)}>More Info</button>
           <br />
-          <button className='favsBtn' type="button" onClick={() => addFavourites(movie.id)}>Favorite</button>
->>>>>>> 7269384a5c227d04c606edf6dc57d49d424b1e08
+          <button className='favsBtn' type="button" onClick={console.log("clicked")}>Favorite</button>
         </div>
       ))}
     </div>
   );
 }
 
-export default MovieGrid;
-//comment
+export default Favourites;
