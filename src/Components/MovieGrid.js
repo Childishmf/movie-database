@@ -4,9 +4,9 @@ import { favouritesKey } from '../globals/constants';
 
 function MovieGrid() {
   const [movies, setMovies] = useState([]);
+  const [sortingOption, setSortingOption] = useState('popular'); // 'popular' or 'best_rated'
   const navigate = useNavigate();
-  const onMoreInfo = (id) => navigate('/details', {state: {movieId: id}});
-  // const test = (id) => console.log(id);
+  const onMoreInfo = (id) => navigate('/details', { state: { movieId: id } });
 
   function addFavourites(id) {
     let favourites = JSON.parse(localStorage.getItem(favouritesKey));
@@ -25,22 +25,30 @@ function MovieGrid() {
       method: 'GET',
       headers: {
         accept: 'application/json',
-        Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjM2MyNjMwZDVhZGY4NjMwODBhNTdmMTc2MmEwNmU3YSIsInN1YiI6IjYzYmRiNTE4NWJlMDBlMDBiMDkwMjYxMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HfjmWn35gIo5XPJy72F5D8qw8lu5NOOKAXZpBtmJtjc',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjM2MyNjMwZDVhZGY4NjMwODBhNTdmMTc2MmEwNmU3YSIsInN1YiI6IjYzYmRiNTE4NWJlMDBlMDBiMDkwMjYxMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HfjmWn35gIo5XPJy72F5D8qw8lu5NOOKAXZpBtmJtjc',
       },
     };
 
     const getMovies = async () => {
       try {
+        let endpoint = '';
+
+        if (sortingOption === 'popular') {
+          endpoint = 'now_playing';
+        } else if (sortingOption === 'best_rated') {
+          endpoint = 'top_rated';
+        }
+
         const response = await fetch(
-          'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1',
+          `https://api.themoviedb.org/3/movie/${endpoint}?language=en-US&page=1`,
           options
         );
+
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
+
         const data = await response.json();
-        // Got to 12 using splice
         setMovies(data.results.slice(0, 12));
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -48,10 +56,19 @@ function MovieGrid() {
     };
 
     getMovies();
-  }, []);
+  }, [sortingOption]); // Add sortingOption
+
+  const handleSortingChange = (event) => {
+    setSortingOption(event.target.value);
+  };
 
   return (
     <div className="movie-grid">
+      <select onChange={handleSortingChange} value={sortingOption}>
+        <option value="popular">Popular</option>
+        <option value="best_rated">Best Rated</option>
+      </select>
+
       {movies.map((movie) => (
         <div key={movie.id} className="movie-card">
           <img
@@ -60,9 +77,13 @@ function MovieGrid() {
           />
           <h2>{movie.title}</h2>
           <p>{movie.release_date}</p>
-          <button className='infoBtn' type="button" onClick={() => onMoreInfo(movie.id)}>More Info</button>
+          <button className="infoBtn" type="button" onClick={() => onMoreInfo(movie.id)}>
+            More Info
+          </button>
           <br />
-          <button className='favsBtn' type="button" onClick={() => addFavourites(movie.id)}>Favorite</button>
+          <button className="favsBtn" type="button" onClick={() => addFavourites(movie.id)}>
+            Favorite
+          </button>
         </div>
       ))}
     </div>
@@ -70,4 +91,3 @@ function MovieGrid() {
 }
 
 export default MovieGrid;
-//comments
