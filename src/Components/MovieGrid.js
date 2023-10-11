@@ -4,9 +4,8 @@ import { favouritesKey } from '../globals/constants';
 
 function MovieGrid() {
   const [movies, setMovies] = useState([]);
-  const [sortingOption, setSortingOption] = useState('popular'); // 'popular' or 'best_rated'
+  const [sortingOption, setSortingOption] = useState('popular'); // 'popular', 'best_rated', 'now_playing', or 'upcoming'
   const navigate = useNavigate();
-  const onMoreInfo = (id) => navigate('/details', { state: { movieId: id } });
 
   function addFavourites(id) {
     let favourites = JSON.parse(localStorage.getItem(favouritesKey));
@@ -19,6 +18,15 @@ function MovieGrid() {
     let favouritesAsJson = JSON.stringify(favourites);
     localStorage.setItem(favouritesKey, favouritesAsJson);
   }
+
+  // Define the function to navigate to the movie details page
+  const onMoreInfo = (id) => {
+    navigate(`/details/${id}`);
+  };
+
+  const handleSortingChange = (event) => {
+    setSortingOption(event.target.value);
+  };
 
   useEffect(() => {
     const options = {
@@ -37,6 +45,10 @@ function MovieGrid() {
           endpoint = 'now_playing';
         } else if (sortingOption === 'best_rated') {
           endpoint = 'top_rated';
+        } else if (sortingOption === 'now_playing') {
+          endpoint = 'now_playing';
+        } else if (sortingOption === 'upcoming') {
+          endpoint = 'upcoming';
         }
 
         const response = await fetch(
@@ -56,18 +68,19 @@ function MovieGrid() {
     };
 
     getMovies();
-  }, [sortingOption]); // Add sortingOption
-
-  const handleSortingChange = (event) => {
-    setSortingOption(event.target.value);
-  };
+  }, [sortingOption]);
 
   return (
     <div className="movie-grid">
-      <select onChange={handleSortingChange} value={sortingOption}>
-        <option value="popular">Popular</option>
-        <option value="best_rated">Best Rated</option>
-      </select>
+      <div>
+        <label>Sort By:</label>
+        <select onChange={handleSortingChange} value={sortingOption}>
+          <option value="popular">Popular</option>
+          <option value="best_rated">Best Rated</option>
+          <option value="now_playing">Now Playing</option>
+          <option value="upcoming">Upcoming</option>
+        </select>
+      </div>
 
       {movies.map((movie) => (
         <div key={movie.id} className="movie-card">
@@ -77,11 +90,19 @@ function MovieGrid() {
           />
           <h2>{movie.title}</h2>
           <p>{movie.release_date}</p>
-          <button className="infoBtn" type="button" onClick={() => onMoreInfo(movie.id)}>
+          <button
+            className="infoBtn"
+            type="button"
+            onClick={() => onMoreInfo(movie.id)}
+          >
             More Info
           </button>
           <br />
-          <button className="favsBtn" type="button" onClick={() => addFavourites(movie.id)}>
+          <button
+            className="favsBtn"
+            type="button"
+            onClick={() => addFavourites(movie.id)}
+          >
             Favorite
           </button>
         </div>
