@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { favouritesKey } from '../globals/constants';
+import setFavourites from './SetFavourites';
 
 function Favourites() {
   const [movies, setMovies] = useState([]);
@@ -52,7 +53,7 @@ function Favourites() {
           <p>{movie.release_date}</p>
           <button className='infoBtn' type="button" onClick={() => onMoreInfo(movie.id)}>More Info</button>
           <br />
-          <button className='favsBtn' type="button" onClick={console.log("clicked")}>Favorite</button>
+          <button className='favsBtn' type="button" onClick={() => setFavourites(movie.id)}>Favorite</button>
         </div>
       ))}
     </div>

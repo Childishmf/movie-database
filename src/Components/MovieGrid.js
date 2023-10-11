@@ -1,33 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { favouritesKey } from '../globals/constants';
+import setFavourites from './SetFavourites';
+
 
 function MovieGrid() {
   const [movies, setMovies] = useState([]);
   const [sortingOption, setSortingOption] = useState('popular'); // 'popular', 'best_rated', 'now_playing', or 'upcoming'
   const navigate = useNavigate();
-
-  function addFavourites(id) {
-    let favourites = JSON.parse(localStorage.getItem(favouritesKey));
-
-    if (favourites == null) {
-      favourites = [];
-    }
-
-    favourites = [...favourites, id];
-    let favouritesAsJson = JSON.stringify(favourites);
-    localStorage.setItem(favouritesKey, favouritesAsJson);
+  const onMoreInfo = (id) => navigate('/details', {state: {movieId: id}});
+  // const test = (id) => console.log(id);
+  const [selected, setSelected] = useState('popular');
+  const buttonSelect = (e) => {
+    let id = e.target.id;
+    id === 'popular' 
+    ? setSelected('popular')
+    : id === 'top-rated'
+    ? setSelected('top-rated')
+    : id === 'now-playing'
+    ? setSelected('now-playing')
+    : setSelected('upcoming')
   }
-
-  // Define the function to navigate to the movie details page
-  const onMoreInfo = (id) => {
-    navigate(`/details/${id}`);
-  };
-
   const handleSortingChange = (event) => {
     setSortingOption(event.target.value);
   };
-
   useEffect(() => {
     const options = {
       method: 'GET',
@@ -71,42 +66,30 @@ function MovieGrid() {
   }, [sortingOption]);
 
   return (
-    <div className="movie-grid">
-      <div>
-        <label>Sort By:</label>
-        <select onChange={handleSortingChange} value={sortingOption}>
-          <option value="popular">Popular</option>
-          <option value="best_rated">Best Rated</option>
-          <option value="now_playing">Now Playing</option>
-          <option value="upcoming">Upcoming</option>
-        </select>
+    <div className="movie-wrapper">
+      <div className='radio-wrapper'>
+              <button id='popular' className={selected === "popular" ? "selected radio-btn" : "radio-btn"} onClick={buttonSelect}>Popular</button>
+              <button id='top-rated' className={selected === "top-rated" ? "selected radio-btn" : "radio-btn"} onClick={buttonSelect}>Top Rated</button>
+              <button id='now-playing' className={selected === "now-playing" ? "selected radio-btn" : "radio-btn"} onClick={buttonSelect}>Now Playing</button>
+              <button id='upcoming' className={selected === "upcoming" ? "selected radio-btn" : "radio-btn"} onClick={buttonSelect}>Upcoming</button>
+      </div>
+      <div className="movie-grid">
+        {movies.map((movie) => (
+          <div key={movie.id} className="movie-card">
+            <img
+              src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+              alt={movie.title}
+            />
+            <h2>{movie.title}</h2>
+            <p>{movie.release_date}</p>
+            <button className='infoBtn' type="button" onClick={() => onMoreInfo(movie.id)}>More Info</button>
+            <br />
+            <button className='favsBtn' type="button" onClick={() => setFavourites(movie.id)}>Favorite</button>
+          </div>
+        ))}
       </div>
 
-      {movies.map((movie) => (
-        <div key={movie.id} className="movie-card">
-          <img
-            src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-            alt={movie.title}
-          />
-          <h2>{movie.title}</h2>
-          <p>{movie.release_date}</p>
-          <button
-            className="infoBtn"
-            type="button"
-            onClick={() => onMoreInfo(movie.id)}
-          >
-            More Info
-          </button>
-          <br />
-          <button
-            className="favsBtn"
-            type="button"
-            onClick={() => addFavourites(movie.id)}
-          >
-            Favorite
-          </button>
-        </div>
-      ))}
+    
     </div>
   );
 }

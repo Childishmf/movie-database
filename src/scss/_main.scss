@@ -12,7 +12,7 @@ h1 {
     font-weight: 400;
 }
 
-p.about-content {
+div.about-content {
     border: solid 10px $highlight-color;
     border-radius: 10px;
     padding: 1.5rem;
@@ -20,7 +20,11 @@ p.about-content {
     z-index: -2;
     background-color: $highlight-color;
     width: 40%;
+    p {
+        margin-left: 10px;
+    }
 }
+
 
 .about-content:after {
     content: "";
@@ -38,4 +42,13 @@ p.about-content {
 .movie-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.tmdb {
+    margin-bottom: 80px;
+}
+
+.about-content img {
+    float: left;
+    margin: 0 15px;
 }
