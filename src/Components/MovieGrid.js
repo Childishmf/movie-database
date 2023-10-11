@@ -5,6 +5,7 @@ import setFavourites from './SetFavourites';
 
 function MovieGrid() {
   const [movies, setMovies] = useState([]);
+  const [sortingOption, setSortingOption] = useState('popular'); // 'popular', 'best_rated', 'now_playing', or 'upcoming'
   const navigate = useNavigate();
   const onMoreInfo = (id) => navigate('/details', {state: {movieId: id}});
   // const test = (id) => console.log(id);
@@ -19,35 +20,50 @@ function MovieGrid() {
     ? setSelected('now-playing')
     : setSelected('upcoming')
   }
+  const handleSortingChange = (event) => {
+    setSortingOption(event.target.value);
+  };
   useEffect(() => {
     const options = {
       method: 'GET',
       headers: {
         accept: 'application/json',
-        Authorization:
-          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjM2MyNjMwZDVhZGY4NjMwODBhNTdmMTc2MmEwNmU3YSIsInN1YiI6IjYzYmRiNTE4NWJlMDBlMDBiMDkwMjYxMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HfjmWn35gIo5XPJy72F5D8qw8lu5NOOKAXZpBtmJtjc',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjM2MyNjMwZDVhZGY4NjMwODBhNTdmMTc2MmEwNmU3YSIsInN1YiI6IjYzYmRiNTE4NWJlMDBlMDBiMDkwMjYxMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HfjmWn35gIo5XPJy72F5D8qw8lu5NOOKAXZpBtmJtjc',
       },
     };
 
     const getMovies = async () => {
       try {
+        let endpoint = '';
+
+        if (sortingOption === 'popular') {
+          endpoint = 'now_playing';
+        } else if (sortingOption === 'best_rated') {
+          endpoint = 'top_rated';
+        } else if (sortingOption === 'now_playing') {
+          endpoint = 'now_playing';
+        } else if (sortingOption === 'upcoming') {
+          endpoint = 'upcoming';
+        }
+
         const response = await fetch(
-          'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1',
+          `https://api.themoviedb.org/3/movie/${endpoint}?language=en-US&page=1`,
           options
         );
+
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
+
         const data = await response.json();
         setMovies(data.results.slice(0, 12));
-        console.log(movies);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
 
     getMovies();
-  }, []); // <-- You had an extra `()` here
+  }, [sortingOption]);
 
   return (
     <div className="movie-wrapper">
@@ -72,6 +88,8 @@ function MovieGrid() {
           </div>
         ))}
       </div>
+
+    
     </div>
   );
 }
