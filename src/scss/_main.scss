@@ -4,7 +4,7 @@ body {
     background-color: $bg-color;
     color: $text-color;
     font-family: $font-family;
-    display: flex;
+    
     justify-content: center;
 }
 
@@ -33,4 +33,9 @@ p.about-content {
     z-index: -1;
     top: 0;
     left: 0;
+}
+
+.movie-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
