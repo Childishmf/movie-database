@@ -2,13 +2,11 @@
 nav {
 	padding: 10px;
 	font-family: $font-family;
+	display: flex;
+    flex-direction: row-reverse;
 }
 
-nav ul {
-	list-style-type: none;
-	padding: 0;
-	background-color: $nav-bg-color;
-}
+//  
 
 nav li {
 	display: inline;
