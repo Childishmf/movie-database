@@ -4,7 +4,8 @@ import { favouritesKey } from '../globals/constants';
 
 function MovieGrid() {
   const [movies, setMovies] = useState([]);
-  const [sortingOption, setSortingOption] = useState('popular'); // 'popular', 'best_rated', 'now_playing', or 'upcoming'
+  const [sortingOption, setSortingOption] = useState('popular');
+  const [hoveredMovie, setHoveredMovie] = useState(null);
   const navigate = useNavigate();
 
   function addFavourites(id) {
@@ -19,7 +20,6 @@ function MovieGrid() {
     localStorage.setItem(favouritesKey, favouritesAsJson);
   }
 
-  // Define the function to navigate to the movie details page
   const onMoreInfo = (id) => {
     navigate(`/details/${id}`);
   };
@@ -33,7 +33,7 @@ function MovieGrid() {
       method: 'GET',
       headers: {
         accept: 'application/json',
-        Authorization: 'Bearer ',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjM2MyNjM0MDM3ZGFhYTAwMGRkYzI0NjY4N2ZmZDEwOCIsInN1YiI6IjYzYmRiNTE4NWJlMDBlMDBiMDkwMjYxMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HfjmWn35gIo5XPJy72F5D8qw8lu5NOOKAXZpBtmJtjc',
       },
     };
 
@@ -83,7 +83,12 @@ function MovieGrid() {
       </div>
 
       {movies.map((movie) => (
-        <div key={movie.id} className="movie-card">
+        <div
+          key={movie.id}
+          className="movie-card"
+          onMouseEnter={() => setHoveredMovie(movie)}
+          onMouseLeave={() => setHoveredMovie(null)}
+        >
           <img
             src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
             alt={movie.title}
@@ -105,6 +110,11 @@ function MovieGrid() {
           >
             Favorite
           </button>
+          {hoveredMovie === movie && (
+            <div className="plot-tooltip">
+              <p>{movie.overview}</p>
+            </div>
+          )}
         </div>
       ))}
     </div>
