@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { favouritesKey } from '../globals/constants';
-import setFavourites from './SetFavourites';
+import { setFavourites, getFavouriteStatus } from './SetFavourites';
 
 function Favourites() {
   const [movies, setMovies] = useState([]);
+  const [refreshCount, setRefreshCount] = useState(0); //used to refresh page
   const navigate = useNavigate();
   const onMoreInfo = (id) => navigate('/details', {state: {movieId: id}});
   
@@ -41,6 +42,27 @@ function Favourites() {
     getMovies();
   }, []); // <-- You had an extra `()` here
 
+  function getFavouriteButton(movieId) {
+    const isFavourite = getFavouriteStatus(movieId);
+
+    if (isFavourite) {
+      return <button className='favsBtn' type="button" onClick={() => setFavourite(movieId)}>Unfavorite</button>
+    } else {
+      return <button className='favsBtn' type="button" onClick={() => setFavourite(movieId)}>Favorite</button>
+    }
+  }
+
+  const refreshComponent = () => {
+    setRefreshCount(refreshCount + 1);
+  }
+
+  function setFavourite(movieId) {
+    setFavourites(movieId);
+
+    // Force refresh component to show the new favourite button status
+    refreshComponent();
+  }
+
   return (
     <div className="movie-grid">
       {movies.map((movie) => (
@@ -53,7 +75,7 @@ function Favourites() {
           <p>{movie.release_date}</p>
           <button className='infoBtn' type="button" onClick={() => onMoreInfo(movie.id)}>More Info</button>
           <br />
-          <button className='favsBtn' type="button" onClick={() => setFavourites(movie.id)}>Favorite</button>
+          {getFavouriteButton(movie.id)}
         </div>
       ))}
     </div>
