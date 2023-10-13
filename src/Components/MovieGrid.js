@@ -37,7 +37,7 @@ function MovieGrid() {
   const fetchRatings = async (imdbID) => {
     try {
       const response = await axios.get(
-        `https://www.omdbapi.com/?i=${imdbID}&apikey=4304486b`
+        `http://www.omdbapi.com/?i=tt3896198&apikey=4304486b`
       );
 
       if (response.status === 200) {
@@ -155,7 +155,7 @@ function MovieGrid() {
           />
           <h2>{movie.title}</h2>
           <p>{movie.release_date}</p>
-          <p>Rating: {ratings[movie.id] ? ratings[movie.id] : ''}</p>
+          <p>Rating: {[movie.vote_average] ? [movie.vote_average] : 'NA'}</p>
           <button
             className="infoBtn"
             type="button"
