@@ -5,7 +5,7 @@ import { HiOutlineMenu } from 'react-icons/hi';
 import { AiOutlineClose } from 'react-icons/ai';
 
 const Navigation = () => {
-	const isDesktop = useMediaQuery('(min-width: 600px)');
+	const isDesktop = useMediaQuery('(min-width: 700px)');
 	const [open, setOpen] = useState(false);
 	const Hamburgericon = <HiOutlineMenu className='Hamburger' size='40px' color='black' onClick={() => setOpen(!open)} />;
 	const closeicon = <AiOutlineClose className='Closebtn' size='40px' color='black' onClick={() => setOpen(!open)} />;

@@ -1,12 +1,14 @@
 @use "variables" as *;
+@use "mixins" as *;
 
 .radio-wrapper {
     padding: 0.4rem 0.2rem;
     background-color: $nav-link-color;
-    width: max-content;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     border-radius: 20px;
-    margin: 5px;
+    margin: 5px 5px 20px 5px;
 }
 
 .radio-btn {
@@ -14,9 +16,28 @@
     color: $bg-color;
     background-color: $nav-link-color;
     padding: 0.5rem;
-    margin: 0 5px;
+    margin: 5px;
     border-radius: 18px;
     font-weight: bold;
+    width: 45%;
+}
+
+@include media("phone") {
+    .radio-btn {
+        width: 100%;
+    }
+}
+
+@include media("tablet-small") {
+    .radio-btn {
+        width: 48%;
+    }
+}
+
+@include media("tablet-large") {
+    .radio-btn {
+        width: 23%;
+    }
 }
 
 .radio-btn:hover {

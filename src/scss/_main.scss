@@ -1,4 +1,5 @@
 @use "variables" as *;
+@use "mixins" as *;
 
 body {
     background-color: $bg-color;
@@ -12,14 +13,28 @@ body {
 //     font-weight: 400;
 // }
 
+.wrapper {
+    position: relative;
+    min-height: 72vh;
+    padding-bottom: 20px;
+    z-index: 50;
+    margin-top: 100px;
+}
+
+.about-heading {
+    margin: 20px auto;
+    width: fit-content;
+}
+
 div.about-content {
     border: solid 10px $highlight-color;
     border-radius: 10px;
-    padding: 1.5rem;
+    padding: 1.5rem 1.5rem 2.5rem 1.5rem;
     position: relative;
     z-index: -2;
     background-color: $highlight-color;
-    width: 40%;
+    width: 70%;
+    margin: auto;
     p {
         margin-left: 10px;
     }
@@ -41,28 +56,49 @@ div.about-content {
 
 .movie-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr;
+    justify-items: center;
 }
 
-
-@media (max-width: 768px) {
+@include media("tablet-small") {
     .movie-grid {
         grid-template-columns: 1fr 1fr;
     }
 }
 
-/* For small screens (phones), switch to 1 column */
-@media (max-width: 600px) {
+
+@include media("tablet-large") {
     .movie-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
     }
 }
 
-.tmdb {
-    margin-bottom: 80px;
+
+@include media("desktop") {
+    .movie-grid {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
 }
 
+.movie-card {
+    margin-bottom: 30px;
+    h2 {
+        font-size: 1.2rem;
+    }
+}
+
+
+
 .about-content img {
-    float: left;
+    float: none;
     margin: 0 15px;
+}
+
+@include media("tablet-small") {
+    .about-content img {
+        float: left;
+    }
+    .tmdb {
+        margin-bottom: 80px;
+    }
 }
