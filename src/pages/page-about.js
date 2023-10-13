@@ -6,7 +6,7 @@ function PageAbout() {
 	return (
 		<div className='about'>
 			<div className='content'>
-				<h1>About Us</h1>
+				<h1 className='about-heading'>About Us</h1>
 				<div className='about-content'>
 					<p>
 						MovieMax is dedicated to bringing you information on all the newest and upcoming movies, popular feature films, and top rated

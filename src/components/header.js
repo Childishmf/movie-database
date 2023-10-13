@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import Navigation from './Navigation';
 import MobileNavigation from './MobileNavigation';
 import image from '../images/movie-cat.svg';
+import { NavLink } from 'react-router-dom';
 
 const Header = () => {
 	const navigate = useNavigate(); // Get the navigate function from useNavigate

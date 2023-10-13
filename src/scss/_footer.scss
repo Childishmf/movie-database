@@ -1,7 +1,7 @@
 @use "variables" as *;
 .footer {
- position: sticky;
-  bottom: 0;
+ position: absolute;
+  bottom: -100px;
   left: 0;
   right: 0;
   background-color: $nav-bg-color; /* Set the background color as needed */

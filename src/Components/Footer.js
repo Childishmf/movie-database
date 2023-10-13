@@ -13,9 +13,9 @@ function Footer() {
 				<Link to='/favorites'>Favorites</Link>
 			</section>
 			<section className='footer-column'>
-				<Link to='/contact'>Contact</Link>
-				<Link to='/help'>Help</Link>
-				<Link to='/media'>Media</Link>
+				<Link to='#'>Contact</Link>
+				<Link to='#'>Help</Link>
+				<Link to='#'>Media</Link>
 			</section>
 		</div>
 	);
