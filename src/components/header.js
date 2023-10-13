@@ -1,15 +1,23 @@
 import React from 'react';
-import Navigation from './Navigation'; // Import your Navigation component
-import MobileNavigation from './MobileNavigation'; // Import your MobileNavigation component
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import Navigation from './Navigation';
+import MobileNavigation from './MobileNavigation';
 import image from '../images/movie-cat.svg';
 
 const Header = () => {
+	const navigate = useNavigate(); // Get the navigate function from useNavigate
+
+	const handleLogoClick = () => {
+		// Navigate to the home page
+		navigate('/');
+	};
+
 	return (
 		<header>
 			<div className='logo'>
-				<img src={image} alt='logo' />
+				<img src={image} alt='logo' onClick={handleLogoClick} />
 			</div>
-			<Navigation /> {/* Render your Navigation component */}
+			<Navigation />
 		</header>
 	);
 };

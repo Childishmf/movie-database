@@ -21,9 +21,7 @@ const Navigation = () => {
 						<li>
 							<NavLink to='/about'>About</NavLink>
 						</li>
-						<li>
-							<NavLink to='/details'>Details</NavLink>
-						</li>
+						
 						<li>
 							<NavLink to='/favourites'>Favourites</NavLink>
 						</li>
@@ -41,9 +39,7 @@ const Navigation = () => {
 							<li>
 								<NavLink to='/about'>About</NavLink>
 							</li>
-							<li>
-								<NavLink to='/details'>Details</NavLink>
-							</li>
+						
 							<li>
 								<NavLink to='/favourites'>Favourites</NavLink>
 							</li>
