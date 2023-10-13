@@ -1,0 +1,17 @@
+
+.logo{
+    display: flex;
+    position: absolute;
+  width: 130px; /* Adjust the width to the desired size */
+  height: 70px;
+}
+
+
+@media (max-width: 600px) {
+.logo{
+  
+  /* Adjust the width to the desired size */
+  height: 48px;
+}
+
+}

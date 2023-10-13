@@ -8,9 +8,9 @@ body {
     justify-content: center;
 }
 
-h1 {
-    font-weight: 400;
-}
+// h1 {
+//     font-weight: 400;
+// }
 
 div.about-content {
     border: solid 10px $highlight-color;
@@ -42,6 +42,20 @@ div.about-content {
 .movie-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+
+@media (max-width: 768px) {
+    .movie-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* For small screens (phones), switch to 1 column */
+@media (max-width: 600px) {
+    .movie-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .tmdb {
