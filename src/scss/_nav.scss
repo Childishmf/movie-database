@@ -44,7 +44,7 @@ header {
 	background-color: $navmb_bg-color;
 	width: 100%;
 	height: 5rem;
-	position: fixed;
+	position: sticky;
 }
 
 @media (max-width: 600px) {
