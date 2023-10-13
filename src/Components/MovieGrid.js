@@ -10,6 +10,29 @@ function MovieGrid() {
   const navigate = useNavigate();
   const [ratings, setRatings] = useState({});
 
+  // Function to fetch movie details from TMDb
+  const fetchMovieDetails = async (movieID) => {
+    try {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/movie/${movieID}?language=en-US`,
+        {
+          headers: {
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjM2MyNjM0MDM3ZGFhYTAwMGRkYzI0NjY4N2ZmZDEwOCIsInN1YiI6IjYzYmRiNTE4NWJlMDBlMDBiMDkwMjYxMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HfjmWn35gIo5XPJy72F5D8qw8lu5NOOKAXZpBtmJtjc',
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        const imdbID = response.data.imdb_id;
+        return imdbID;
+      }
+    } catch (error) {
+      console.error('Error fetching movie details:', error);
+    }
+
+    return null;
+  };
+
   // Function to fetch movie ratings from OMDb API
   const fetchRatings = async (imdbID) => {
     try {
@@ -86,7 +109,7 @@ function MovieGrid() {
           // Fetch and set ratings for each movie
           const ratingsMap = {};
           for (const movie of data) {
-            const imdbID = movie.imdb_id;
+            const imdbID = await fetchMovieDetails(movie.id);
 
             if (imdbID) {
               const rating = await fetchRatings(imdbID);
@@ -132,7 +155,7 @@ function MovieGrid() {
           />
           <h2>{movie.title}</h2>
           <p>{movie.release_date}</p>
-          <p>Rating: {ratings[movie.id] ? ratings[movie.id] : 'N/A'}</p>
+          <p>Rating: {ratings[movie.id] ? ratings[movie.id] : ''}</p>
           <button
             className="infoBtn"
             type="button"
