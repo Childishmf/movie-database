@@ -1,12 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { favouritesKey } from '../globals/constants';
+import axios from 'axios';
 
 function MovieGrid() {
   const [movies, setMovies] = useState([]);
   const [sortingOption, setSortingOption] = useState('popular');
   const [hoveredMovie, setHoveredMovie] = useState(null);
   const navigate = useNavigate();
+  const [ratings, setRatings] = useState({});
+
+  // Function to fetch movie ratings from OMDb API
+  const fetchRatings = async (imdbID) => {
+    try {
+      const response = await axios.get(
+        `http://www.omdbapi.com/?i=${imdbID}&apikey=YOUR_OMDB_API_KEY`
+      );
+
+      if (response.status === 200) {
+        const rating = response.data.imdbRating;
+        return rating;
+      }
+    } catch (error) {
+      console.error('Error fetching ratings:', error);
+    }
+
+    return null;
+  };
 
   function addFavourites(id) {
     let favourites = JSON.parse(localStorage.getItem(favouritesKey));
@@ -51,17 +71,35 @@ function MovieGrid() {
           endpoint = 'upcoming';
         }
 
-        const response = await fetch(
+        const response = await axios.get(
           `https://api.themoviedb.org/3/movie/${endpoint}?language=en-US&page=1`,
-          options
+          {
+            headers: {
+              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjM2MyNjM0MDM3ZGFhYTAwMGRkYzI0NjY4N2ZmZDEwOCIsInN1YiI6IjYzYmRiNTE4NWJlMDBlMDBiMDkwMjYxMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HfjmWn35gIo5XPJy72F5D8qw8lu5NOOKAXZpBtmJtjc'
+              ,
+            },
+          }
         );
 
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
+        if (response.status === 200) {
+          const data = response.data.results.slice(0, 12);
 
-        const data = await response.json();
-        setMovies(data.results.slice(0, 12));
+          // Fetch and set ratings for each movie
+          const ratingsMap = {};
+          for (const movie of data) {
+            const imdbID = movie.imdb_id;
+
+            if (imdbID) {
+              const rating = await fetchRatings(imdbID);
+              if (rating) {
+                ratingsMap[movie.id] = rating;
+              }
+            }
+          }
+
+          setMovies(data);
+          setRatings(ratingsMap);
+        }
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -95,6 +133,7 @@ function MovieGrid() {
           />
           <h2>{movie.title}</h2>
           <p>{movie.release_date}</p>
+          <p>Rating: {ratings[movie.id] ? ratings[movie.id] : ''}</p>
           <button
             className="infoBtn"
             type="button"
