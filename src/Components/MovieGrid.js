@@ -14,7 +14,7 @@ function MovieGrid() {
   const fetchRatings = async (imdbID) => {
     try {
       const response = await axios.get(
-        `http://www.omdbapi.com/?i=${imdbID}&apikey=YOUR_OMDB_API_KEY`
+        `http://www.omdbapi.com/?i=tt3896198&apikey=4304486bY`
       );
 
       if (response.status === 200) {
@@ -59,7 +59,7 @@ function MovieGrid() {
 
     const getMovies = async () => {
       try {
-        let endpoint = '';
+        let endpoint = 'NA';
 
         if (sortingOption === 'popular') {
           endpoint = 'now_playing';
