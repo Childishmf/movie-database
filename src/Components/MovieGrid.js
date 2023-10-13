@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import setFavourites from './SetFavourites';
+import { setFavourites, getFavouriteStatus} from './SetFavourites';
 
 
 function MovieGrid() {
@@ -10,6 +10,7 @@ function MovieGrid() {
   const onMoreInfo = (id) => navigate('/details', {state: {movieId: id}});
   // const test = (id) => console.log(id);
   const [selected, setSelected] = useState('popular');
+  const [refreshCount, setRefreshCount] = useState(0); //used to refresh page
   const buttonSelect = (e) => {
     let id = e.target.id;
     id === 'popular' 
@@ -65,6 +66,29 @@ function MovieGrid() {
     getMovies();
   }, [sortingOption]);
 
+  function getFavouriteButton(movieId) {
+    const isFavourite = getFavouriteStatus(movieId);
+
+    if (isFavourite) {
+      return <button className='favsBtn' type="button" onClick={() => setFavourite(movieId)}>Unfavorite</button>
+    } else {
+      return <button className='favsBtn' type="button" onClick={() => setFavourite(movieId)}>Favorite</button>
+    }
+  }
+
+  const refreshComponent = () => {
+    setRefreshCount(refreshCount + 1);
+  }
+
+  function setFavourite(movieId) {
+    setFavourites(movieId);
+
+    // Force refresh component to show the new favourite button status
+    refreshComponent();
+  }
+
+
+
   return (
     <div className="movie-wrapper">
       <div className='radio-wrapper'>
@@ -84,7 +108,7 @@ function MovieGrid() {
             <p>{movie.release_date}</p>
             <button className='infoBtn' type="button" onClick={() => onMoreInfo(movie.id)}>More Info</button>
             <br />
-            <button className='favsBtn' type="button" onClick={() => setFavourites(movie.id)}>Favorite</button>
+            {getFavouriteButton(movie.id)}
           </div>
         ))}
       </div>
