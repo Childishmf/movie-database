@@ -14,7 +14,7 @@ function MovieGrid() {
   const fetchRatings = async (imdbID) => {
     try {
       const response = await axios.get(
-        `http://www.omdbapi.com/?i=tt3896198&apikey=4304486bY`
+        `https://www.omdbapi.com/?i=${imdbID}&apikey=4304486b`
       );
 
       if (response.status === 200) {
@@ -59,7 +59,7 @@ function MovieGrid() {
 
     const getMovies = async () => {
       try {
-        let endpoint = 'NA';
+        let endpoint = '';
 
         if (sortingOption === 'popular') {
           endpoint = 'now_playing';
@@ -75,8 +75,7 @@ function MovieGrid() {
           `https://api.themoviedb.org/3/movie/${endpoint}?language=en-US&page=1`,
           {
             headers: {
-              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjM2MyNjM0MDM3ZGFhYTAwMGRkYzI0NjY4N2ZmZDEwOCIsInN1YiI6IjYzYmRiNTE4NWJlMDBlMDBiMDkwMjYxMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HfjmWn35gIo5XPJy72F5D8qw8lu5NOOKAXZpBtmJtjc'
-              ,
+              Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjM2MyNjM0MDM3ZGFhYTAwMGRkYzI0NjY4N2ZmZDEwOCIsInN1YiI6IjYzYmRiNTE4NWJlMDBlMDBiMDkwMjYxMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HfjmWn35gIo5XPJy72F5D8qw8lu5NOOKAXZpBtmJtjc',
             },
           }
         );
@@ -133,7 +132,7 @@ function MovieGrid() {
           />
           <h2>{movie.title}</h2>
           <p>{movie.release_date}</p>
-          <p>Rating: {ratings[movie.id] ? ratings[movie.id] : ''}</p>
+          <p>Rating: {ratings[movie.id] ? ratings[movie.id] : 'N/A'}</p>
           <button
             className="infoBtn"
             type="button"
