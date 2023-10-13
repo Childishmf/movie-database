@@ -5,7 +5,6 @@ import { setFavourites, getFavouriteStatus} from './SetFavourites';
 
 function MovieGrid() {
   const [movies, setMovies] = useState([]);
-  const [sortingOption, setSortingOption] = useState('popular'); // 'popular', 'best_rated', 'now_playing', or 'upcoming'
   const navigate = useNavigate();
   const onMoreInfo = (id) => navigate('/details', {state: {movieId: id}});
   // const test = (id) => console.log(id);
@@ -21,9 +20,6 @@ function MovieGrid() {
     ? setSelected('now-playing')
     : setSelected('upcoming')
   }
-  const handleSortingChange = (event) => {
-    setSortingOption(event.target.value);
-  };
   useEffect(() => {
     const options = {
       method: 'GET',
@@ -37,13 +33,13 @@ function MovieGrid() {
       try {
         let endpoint = '';
 
-        if (sortingOption === 'popular') {
+        if (selected === 'popular') {
           endpoint = 'now_playing';
-        } else if (sortingOption === 'best_rated') {
+        } else if (selected === 'best_rated') {
           endpoint = 'top_rated';
-        } else if (sortingOption === 'now_playing') {
+        } else if (selected === 'now_playing') {
           endpoint = 'now_playing';
-        } else if (sortingOption === 'upcoming') {
+        } else if (selected === 'upcoming') {
           endpoint = 'upcoming';
         }
 
@@ -64,7 +60,7 @@ function MovieGrid() {
     };
 
     getMovies();
-  }, [sortingOption]);
+  }, [selected]);
 
   function getFavouriteButton(movieId) {
     const isFavourite = getFavouriteStatus(movieId);
