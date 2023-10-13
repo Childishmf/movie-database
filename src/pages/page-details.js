@@ -56,7 +56,7 @@ const PageDetails = () => {
     const isFavourite = getFavouriteStatus(movieId);
 
     if (isFavourite) {
-      return <button className='favsBtn' type="button" onClick={() => setFavourite()}>Unfavorite</button>
+      return <button className='unFavsBtn' type="button" onClick={() => setFavourite()}>Unfavorite</button>
     } else {
       return <button className='favsBtn' type="button" onClick={() => setFavourite()}>Favorite</button>
     }
@@ -95,7 +95,7 @@ const PageDetails = () => {
           />
         </div>
       </div>
-      <iframe
+      {/* <iframe
       className='youtubeEmbed'
             width="560"
             height="315"
@@ -103,9 +103,9 @@ const PageDetails = () => {
             title="YouTube Video Player"
             frameborder="0"
             allowfullscreen
-          ></iframe>
+          ></iframe> */}
         {/* <YoutubeEmbed embedId="cqGjhVJWtEg"/> */}
-        <p>below youtube</p>
+        {/* <p>below youtube</p> */}
     </div>
   );
 };
