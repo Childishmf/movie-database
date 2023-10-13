@@ -7,6 +7,9 @@ import { AiOutlineClose } from 'react-icons/ai';
 const Navigation = () => {
 	const isDesktop = useMediaQuery('(min-width: 700px)');
 	const [open, setOpen] = useState(false);
+	const closeMenu = () => {
+        setOpen(false);
+    };
 	const Hamburgericon = <HiOutlineMenu className='Hamburger' size='40px' color='black' onClick={() => setOpen(!open)} />;
 	const closeicon = <AiOutlineClose className='Closebtn' size='40px' color='black' onClick={() => setOpen(!open)} />;
 
@@ -21,9 +24,7 @@ const Navigation = () => {
 						<li>
 							<NavLink to='/about'>About</NavLink>
 						</li>
-						<li>
-							<NavLink to='/details'>Details</NavLink>
-						</li>
+						
 						<li>
 							<NavLink to='/favourites'>Favourites</NavLink>
 						</li>
@@ -36,17 +37,17 @@ const Navigation = () => {
 					{open && (
 						<ul>
 							<li>
-								<NavLink to='/'>Home</NavLink>
-							</li>
-							<li>
-								<NavLink to='/about'>About</NavLink>
-							</li>
-							<li>
-								<NavLink to='/details'>Details</NavLink>
-							</li>
-							<li>
-								<NavLink to='/favourites'>Favourites</NavLink>
-							</li>
+                        <NavLink to='/' onClick={closeMenu}>Home</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to='/about' onClick={closeMenu}>About</NavLink>
+                    </li>
+                    {/* <li>
+                        <NavLink to='/details' onClick={closeMenu}>Details</NavLink>
+                    </li> */}
+                    <li>
+                        <NavLink to='/favourites' onClick={closeMenu}>Favourites</NavLink>
+                    </li>
 						</ul>
 					)}
 				</nav>

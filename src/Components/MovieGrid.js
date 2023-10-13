@@ -70,7 +70,7 @@ function MovieGrid() {
     const isFavourite = getFavouriteStatus(movieId);
 
     if (isFavourite) {
-      return <button className='favsBtn' type="button" onClick={() => setFavourite(movieId)}>Unfavorite</button>
+      return <button className='unFavsBtn' type="button" onClick={() => setFavourite(movieId)}>Unfavorite</button>
     } else {
       return <button className='favsBtn' type="button" onClick={() => setFavourite(movieId)}>Favorite</button>
     }
@@ -107,6 +107,7 @@ function MovieGrid() {
             <h2>{movie.title}</h2>
             <p>{movie.release_date}</p>
             <button className='infoBtn' type="button" onClick={() => onMoreInfo(movie.id)}>More Info</button>
+            <br />
             <br />
             {getFavouriteButton(movie.id)}
           </div>
