@@ -29,7 +29,7 @@
     --slant: 0.7em;   /* control the slanted corners */
     --color: #FF00FC; /* the color */
     
-    font-size: 35px;
+    font-size: 28px;
     padding: 0.4em 1.2em;
     border: none;
     cursor: pointer;
@@ -71,7 +71,7 @@
     --slant: 0.7em;   /* control the slanted corners */
     --color: #FFD800; /* the color */
     
-    font-size: 35px;
+    font-size: 28px;
     padding: 0.4em 1.2em;
     border: none;
     cursor: pointer;
@@ -113,7 +113,7 @@
     --slant: 0.7em;   /* control the slanted corners */
     --color: #ff0000; /* the color */
     
-    font-size: 35px;
+    font-size: 28px;
     padding: 0.4em 1.2em;
     border: none;
     cursor: pointer;
@@ -155,7 +155,7 @@
     --slant: 0.7em;   /* control the slanted corners */
     --color: #FFD800; /* the color */
     
-    font-size: 35px;
+    font-size: 28px;
     padding: 0.4em 1.2em;
     border: none;
     cursor: pointer;
@@ -208,4 +208,9 @@
     flex-direction: column-reverse;
     align-items: center; 
      } 
+  }
+
+  .no-favorites-message {
+    font-size: -webkit-xxx-large;
+    padding: 20px;
   }
