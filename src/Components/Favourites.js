@@ -8,7 +8,6 @@ function Favourites() {
   const [refreshCount, setRefreshCount] = useState(0); 
   const navigate = useNavigate();
   const onMoreInfo = (id) => navigate('/details', {state: {movieId: id}});
-  
   const favouritesIds = JSON.parse(localStorage.getItem(favouritesKey));
 
   useEffect(() => {
@@ -62,12 +61,14 @@ function Favourites() {
     refreshComponent();
   }
 
+  
+
   return (
     <div className="movie-grid">
-      {movies.length === 0 ? (
-        <div className="no-favorites-message">
+      {favouritesIds.length === 0 ? (
+        <h1 className="no-favorites-message">
           Sorry, it looks like you haven’t added any movies to your Favourites page. Return to the Home page to add a favorite movie.
-        </div>
+        </h1>
       ) : (
         movies.map((movie) => (
           <div key={movie.id} className="movie-card">

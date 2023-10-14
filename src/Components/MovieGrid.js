@@ -31,20 +31,21 @@ function MovieGrid() {
 
     const getMovies = async () => {
       try {
-        let endpoint = '';
+        let url = '';
+        
 
         if (selected === 'popular') {
-          endpoint = 'now_playing';
-        } else if (selected === 'best_rated') {
-          endpoint = 'top_rated';
-        } else if (selected === 'now_playing') {
-          endpoint = 'now_playing';
+          url = 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1';
+        } else if (selected === 'top-rated') {
+          url = 'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1';
+        } else if (selected === 'now-playing') {
+          url = 'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1';
         } else if (selected === 'upcoming') {
-          endpoint = 'upcoming';
+          url = 'https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1';
         }
 
         const response = await fetch(
-          `https://api.themoviedb.org/3/movie/${endpoint}?language=en-US&page=1`,
+          url,
           options
         );
 

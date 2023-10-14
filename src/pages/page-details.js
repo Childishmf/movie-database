@@ -1,28 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import YoutubeEmbed from "../components/YoutubeEmbed";
-import logo from '../images/Spider-man-2.png';
-import { Authorization, favouritesKey } from '../globals/constants';
+import { Authorization } from '../globals/constants';
 import { useLocation } from "react-router-dom";
 import { setFavourites, getFavouriteStatus} from '../components/SetFavourites';
-
 
 const PageDetails = () => {
   const location = useLocation();
   let movieId = location.state ? location.state.movieId : null;
   const [movieDetail, setMovieDetail] = useState(null);
   const [refreshCount, setRefreshCount] = useState(0); //used to refresh page
-
-  function addFavourites() {
-    let favourites = JSON.parse(localStorage.getItem(favouritesKey));
-
-    if (favourites == null) {
-      favourites = [];
-    }
-
-    favourites = [...favourites, movieId];
-    let favouritesAsJson = JSON.stringify(favourites);
-    localStorage.setItem(favouritesKey, favouritesAsJson);
-  }
 
   useEffect(() => {
     const options = {
@@ -95,17 +80,6 @@ const PageDetails = () => {
           />
         </div>
       </div>
-      {/* <iframe
-      className='youtubeEmbed'
-            width="560"
-            height="315"
-            src={`https://www.youtube.com/embed/VIDEO_ID`}
-            title="YouTube Video Player"
-            frameborder="0"
-            allowfullscreen
-          ></iframe> */}
-        {/* <YoutubeEmbed embedId="cqGjhVJWtEg"/> */}
-        {/* <p>below youtube</p> */}
     </div>
   );
 };

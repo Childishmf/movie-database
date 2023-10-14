@@ -71,12 +71,13 @@ header {
 
 	nav li a {
 		border: 1px solid black;
-		padding: 4px 93px;
+		padding: 4px 0px;
 		background-color: $highlight-color;
 		font-size: 1.5rem;
 		display: block;
 		text-align: center;
 		font-weight: bold;
+		width: 100%;
 	}
 
 	nav a {
