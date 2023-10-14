@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { favouritesKey } from '../globals/constants';
-import setFavourites from './SetFavourites';
+import { setFavourites, getFavouriteStatus } from './SetFavourites';
 
 function Favourites() {
   const [movies, setMovies] = useState([]);
+  const [refreshCount, setRefreshCount] = useState(0); 
   const navigate = useNavigate();
   const onMoreInfo = (id) => navigate('/details', {state: {movieId: id}});
-  
   const favouritesIds = JSON.parse(localStorage.getItem(favouritesKey));
 
   useEffect(() => {
@@ -39,23 +39,52 @@ function Favourites() {
     };
 
     getMovies();
-  }, []); // <-- You had an extra `()` here
+  }, []);
+  function getFavouriteButton(movieId) {
+    const isFavourite = getFavouriteStatus(movieId);
+
+    if (isFavourite) {
+      return <button className='unFavsBtn' type="button" onClick={() => setFavourite(movieId)}>Unfavorite</button>
+    } else {
+      return <button className='favsBtn' type="button" onClick={() => setFavourite(movieId)}>Favorite</button>
+    }
+  }
+
+  const refreshComponent = () => {
+    setRefreshCount(refreshCount + 1);
+  }
+
+  function setFavourite(movieId) {
+    setFavourites(movieId);
+
+  
+    refreshComponent();
+  }
+
+  
 
   return (
     <div className="movie-grid">
-      {movies.map((movie) => (
-        <div key={movie.id} className="movie-card">
-          <img
-            src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-            alt={movie.title}
-          />
-          <h2>{movie.title}</h2>
-          <p>{movie.release_date}</p>
-          <button className='infoBtn' type="button" onClick={() => onMoreInfo(movie.id)}>More Info</button>
-          <br />
-          <button className='favsBtn' type="button" onClick={() => setFavourites(movie.id)}>Favorite</button>
-        </div>
-      ))}
+      {favouritesIds.length === 0 ? (
+        <h1 className="no-favorites-message">
+          Sorry, it looks like you haven’t added any movies to your Favourites page. Return to the Home page to add a favorite movie.
+        </h1>
+      ) : (
+        movies.map((movie) => (
+          <div key={movie.id} className="movie-card">
+            <img
+              src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+              alt={movie.title}
+            />
+            <h2>{movie.title}</h2>
+            <p>{movie.release_date}</p>
+            <button className='infoBtn' type="button" onClick={() => onMoreInfo(movie.id)}>More Info</button>
+            <br />
+            <br />
+            {getFavouriteButton(movie.id)}
+          </div>
+        ))
+      )}
     </div>
   );
 }

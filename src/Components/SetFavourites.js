@@ -1,6 +1,6 @@
 import { favouritesKey } from '../globals/constants';
 
-function setFavourites(id) {
+export function setFavourites(id) {
     let favourites = JSON.parse(localStorage.getItem(favouritesKey));
     let favourited = false;
     if (favourites == null) {
@@ -26,4 +26,19 @@ function setFavourites(id) {
     }
 }
 
-export default setFavourites;
+// Return true if the movie is favourited, false otherwise
+export function getFavouriteStatus(id) {
+  let favourites = JSON.parse(localStorage.getItem(favouritesKey));
+  if (favourites == null) {
+    return false;
+  }
+
+  for (let favourite of favourites) {
+    if (favourite === id) {
+      return true;
+    }
+  }
+  
+  return false;
+}
+

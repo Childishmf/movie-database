@@ -1,16 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { favouritesKey } from '../globals/constants';
-import axios from 'axios';
+
+import { setFavourites, getFavouriteStatus} from './SetFavourites';
+
 
 function MovieGrid() {
   const [movies, setMovies] = useState([]);
-  const [sortingOption, setSortingOption] = useState('popular');
   const [hoveredMovie, setHoveredMovie] = useState(null);
   const navigate = useNavigate();
+  const onMoreInfo = (id) => navigate('/details', {state: {movieId: id}});
   const [ratings, setRatings] = useState({});
-
-  // Function to fetch movie details from TMDb
+  // const test = (id) => console.log(id);
+  const [selected, setSelected] = useState('popular');
+  const [refreshCount, setRefreshCount] = useState(0); //used to refresh page
+  const buttonSelect = (e) => {
+    let id = e.target.id;
+    id === 'popular' 
+    ? setSelected('popular')
+    : id === 'top-rated'
+    ? setSelected('top-rated')
+    : id === 'now-playing'
+    ? setSelected('now-playing')
+    : setSelected('upcoming')
+  }
+  
   const fetchMovieDetails = async (movieID) => {
     try {
       const response = await axios.get(
@@ -32,8 +45,7 @@ function MovieGrid() {
 
     return null;
   };
-
-  // Function to fetch movie ratings from OMDb API
+  
   const fetchRatings = async (imdbID) => {
     try {
       const response = await axios.get(
@@ -51,26 +63,6 @@ function MovieGrid() {
     return null;
   };
 
-  function addFavourites(id) {
-    let favourites = JSON.parse(localStorage.getItem(favouritesKey));
-
-    if (favourites == null) {
-      favourites = [];
-    }
-
-    favourites = [...favourites, id];
-    let favouritesAsJson = JSON.stringify(favourites);
-    localStorage.setItem(favouritesKey, favouritesAsJson);
-  }
-
-  const onMoreInfo = (id) => {
-    navigate(`/details/${id}`);
-  };
-
-  const handleSortingChange = (event) => {
-    setSortingOption(event.target.value);
-  };
-
   useEffect(() => {
     const options = {
       method: 'GET',
@@ -82,16 +74,17 @@ function MovieGrid() {
 
     const getMovies = async () => {
       try {
-        let endpoint = '';
+        let url = '';
+        
 
-        if (sortingOption === 'popular') {
-          endpoint = 'now_playing';
-        } else if (sortingOption === 'best_rated') {
-          endpoint = 'top_rated';
-        } else if (sortingOption === 'now_playing') {
-          endpoint = 'now_playing';
-        } else if (sortingOption === 'upcoming') {
-          endpoint = 'upcoming';
+        if (selected === 'popular') {
+          url = 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1';
+        } else if (selected === 'top-rated') {
+          url = 'https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1';
+        } else if (selected === 'now-playing') {
+          url = 'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1';
+        } else if (selected === 'upcoming') {
+          url = 'https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1';
         }
 
         const response = await axios.get(
@@ -101,6 +94,7 @@ function MovieGrid() {
               Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjM2MyNjM0MDM3ZGFhYTAwMGRkYzI0NjY4N2ZmZDEwOCIsInN1YiI6IjYzYmRiNTE4NWJlMDBlMDBiMDkwMjYxMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.HfjmWn35gIo5XPJy72F5D8qw8lu5NOOKAXZpBtmJtjc',
             },
           }
+
         );
 
         if (response.status === 200) {
@@ -128,18 +122,55 @@ function MovieGrid() {
     };
 
     getMovies();
-  }, [sortingOption]);
+  }, [selected]);
+
+  function getFavouriteButton(movieId) {
+    const isFavourite = getFavouriteStatus(movieId);
+
+    if (isFavourite) {
+      return <button className='unFavsBtn' type="button" onClick={() => setFavourite(movieId)}>Unfavorite</button>
+    } else {
+      return <button className='favsBtn' type="button" onClick={() => setFavourite(movieId)}>Favorite</button>
+    }
+  }
+
+  const refreshComponent = () => {
+    setRefreshCount(refreshCount + 1);
+  }
+
+  function setFavourite(movieId) {
+    setFavourites(movieId);
+
+    // Force refresh component to show the new favourite button status
+    refreshComponent();
+  }
+
+
 
   return (
-    <div className="movie-grid">
-      <div>
-        <label>Sort By:</label>
-        <select onChange={handleSortingChange} value={sortingOption}>
-          <option value="popular">Popular</option>
-          <option value="best_rated">Best Rated</option>
-          <option value="now_playing">Now Playing</option>
-          <option value="upcoming">Upcoming</option>
-        </select>
+    <div className="movie-wrapper">
+      <div className='radio-wrapper'>
+              <button id='popular' className={selected === "popular" ? "selected radio-btn" : "radio-btn"} onClick={buttonSelect}>Popular</button>
+              <button id='top-rated' className={selected === "top-rated" ? "selected radio-btn" : "radio-btn"} onClick={buttonSelect}>Top Rated</button>
+              <button id='now-playing' className={selected === "now-playing" ? "selected radio-btn" : "radio-btn"} onClick={buttonSelect}>Now Playing</button>
+              <button id='upcoming' className={selected === "upcoming" ? "selected radio-btn" : "radio-btn"} onClick={buttonSelect}>Upcoming</button>
+      </div>
+      <div className="movie-grid">
+        {movies.map((movie) => (
+          <div key={movie.id} className="movie-card">
+            <img
+              src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+              alt={movie.title}
+            />
+            <h2>{movie.title}</h2>
+            <p>{movie.release_date}</p>
+            <button className='infoBtn' type="button" onClick={() => onMoreInfo(movie.id)}>More Info</button>
+            <br />
+            <br />
+            {getFavouriteButton(movie.id)}
+          </div>
+        ))}
+
       </div>
 
       {movies.map((movie) => (

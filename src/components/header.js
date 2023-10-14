@@ -1,11 +1,19 @@
 import React from 'react';
-import Navigation from './Navigation'; // Import your Navigation component
-import MobileNavigation from './MobileNavigation'; // Import your MobileNavigation component
+import Navigation from './Navigation';
+import image from '../images/movie-cat.svg';
+import { NavLink } from 'react-router-dom';
 
 const Header = () => {
+
 	return (
 		<header>
-			<Navigation /> {/* Render your Navigation component */}
+			
+			<NavLink to='/'>
+				<div className='logo'>
+					<img src={image} alt='logo' />
+				</div>
+			</NavLink>
+			<Navigation />
 		</header>
 	);
 };
