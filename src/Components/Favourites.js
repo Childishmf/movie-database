@@ -23,7 +23,7 @@ function Favourites() {
     const getMovies = async () => {
       try {
         const response = await fetch(
-          'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1',
+          `https://api.themoviedb.org/3/discover/movie?api_key=1023dc74f9f53c0eb05e0bbc7feb54c0`,
           options
         );
         if (!response.ok) {
