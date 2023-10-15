@@ -6,9 +6,9 @@
     background-color: $nav-link-color;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    border-radius: 20px;
-    margin: 5px 5px 20px 5px;
+    justify-content: space-around;
+    border-radius: 25px;
+    margin: 5px 15px 20px 15px;
 }
 
 .radio-btn {
@@ -22,12 +22,6 @@
     width: 45%;
 }
 
-@include media("phone") {
-    .radio-btn {
-        width: 100%;
-    }
-}
-
 @include media("tablet-small") {
     .radio-btn {
         width: 48%;
@@ -35,6 +29,9 @@
 }
 
 @include media("tablet-large") {
+    .radio-wrapper {
+        border-radius: 30px;
+    }
     .radio-btn {
         width: 23%;
     }
