@@ -85,7 +85,6 @@ function MovieGrid() {
   }
 
 
-
   return (
     <div className="movie-wrapper">
       <div className='radio-wrapper'>
@@ -100,12 +99,11 @@ function MovieGrid() {
             <img
               src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
               alt={movie.title}
-              onMouseOver={<p>lol</p>}
             />
             <h2>{movie.title}</h2>
             <p>{movie.release_date}</p>
             <p>Rating: {movie.vote_average}/10</p>
-            <p>{movie.overview}</p>
+            <p className='movie-summary'>{movie.overview}</p>
             <button className='infoBtn' type="button" onClick={() => onMoreInfo(movie.id)}>More Info</button>
             <br />
             <br />

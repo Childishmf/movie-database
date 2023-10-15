@@ -65,7 +65,7 @@ const PageDetails = () => {
       <div className="MovieInfo">
         <h1>{movieDetail?.title}</h1>
         <p>{movieDetail?.release_date}</p>
-        {/* <p>2023-06-02</p> */}
+        <p>Rating: {movieDetail?.vote_average}/10</p>
         <h2>Overview</h2>
         {getFavouriteButton()}
 
