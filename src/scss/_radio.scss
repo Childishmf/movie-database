@@ -1,0 +1,49 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+.radio-wrapper {
+    padding: 0.4rem 0.2rem;
+    background-color: $nav-link-color;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    border-radius: 25px;
+    margin: 5px 15px 20px 15px;
+}
+
+.radio-btn {
+    border: 5px solid $bg-color;
+    color: $bg-color;
+    background-color: $nav-link-color;
+    padding: 0.5rem;
+    margin: 5px;
+    border-radius: 18px;
+    font-weight: bold;
+    width: 45%;
+}
+
+@include media("tablet-small") {
+    .radio-btn {
+        width: 48%;
+    }
+}
+
+@include media("tablet-large") {
+    .radio-wrapper {
+        border-radius: 30px;
+    }
+    .radio-btn {
+        width: 23%;
+    }
+}
+
+.radio-btn:hover {
+    background-color: $bg-color;
+    color: $nav-link-color;
+}
+
+.radio-btn.selected {
+    background-color: $bg-color;
+    color: $nav-link-color;
+}
+

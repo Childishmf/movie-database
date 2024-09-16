@@ -1,0 +1,16 @@
+
+.logo{
+    position: absolute;
+  width: 80px; /* Adjust the width to the desired size */
+  margin-left: 20px;
+}
+
+
+@media (max-width: 600px) {
+.logo{
+  
+  /* Adjust the width to the desired size */
+  height: 48px;
+}
+
+}

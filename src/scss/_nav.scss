@@ -1,0 +1,126 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+nav {
+	padding: 10px;
+	font-family: $font-family;
+	display: flex;
+	flex-direction: row-reverse;
+	
+}
+
+//
+
+nav li {
+	display: inline;
+	margin-right: 10px;
+	padding: 15px;
+}
+li {
+	// border: 1px solid #FFD800; /* Add border style */
+     padding: 10px 10px;
+    border-radius: 10px;
+	background-color: $bg-color;
+	position: relative;
+	    bottom: 10px;
+		margin: 1.5rem;
+}
+
+nav a {
+	color: $nav-link-color;
+	text-decoration: none;
+	font-size: $navtitle-font-size;
+	 position: relative;
+    bottom: -4px;
+}
+
+nav a:hover {
+	color: $highlight-color;
+	text-decoration: underline;
+}
+
+.MobileNavigation {
+	display: none;
+}
+
+header {
+	background-color: $navmb_bg-color;
+	width: 100%;
+	height: 5rem;
+	position: fixed;
+	z-index: 100;
+}
+
+@media (max-width: 699px) {
+	header{
+		background-color: $navmb_bg-color;
+	}
+	
+
+	// .Navigation {
+	// 	display: none;
+	// }
+	
+	    li {
+        border: none; /* Remove the border for mobile screens */
+        padding: 0; /* Reset padding for mobile screens */
+		position: relative;
+	    bottom: -5px;
+		width: 70%;
+		background-color: transparent;
+    }
+
+
+	nav li a {
+		border: 1px solid black;
+		padding: 4px 0px;
+		background-color: $highlight-color;
+		font-size: 1.5rem;
+		display: block;
+		text-align: center;
+		font-weight: bold;
+		width: 100%;
+	}
+
+	nav a {
+		color: $navtext-color;
+	}
+
+	.MobileNavigation {
+		display: flex;
+
+		align-items: center;
+	}
+
+	.Hamburger {
+		position: absolute;
+		right: 4%;
+		cursor: pointer;
+		top: 7px;
+		width: 60px;
+		height: 60px;
+
+	}
+
+	.Closebtn {
+		position: absolute;
+		right: 4%;
+		cursor: pointer;
+		top: 7px;
+		width: 60px;
+		height: 60px;
+	}
+	.MobileNavigation ul {
+		display: flex;
+		flex-direction: column;
+		position: absolute;
+		top: 40px;
+		right: 0;
+		width: 100%;
+		background-color: $navmb_bg-color;
+		align-items: center;
+	}
+
+	.MobileNavigation ul li {
+		margin-bottom: 19px; /* Adjust the value to set the desired space between items */
+	}
+}
